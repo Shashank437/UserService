@@ -1,6 +1,7 @@
 const User = require('./user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
 
 const createUser = async (data) => {
     const user = new User(data);
@@ -41,6 +42,24 @@ const logout = async (id) => {
     return User.findByIdAndUpdate(id, { token: null });
 }
 
+const createItem = async (data) => {
+    try {
+        const response = await axios.post('https://localhost:3000/create', data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to create item');
+    }
+};
+
+const buyItem = async (data) => {
+    try {
+        const response = await axios.post('https://localhost:3000/buy', data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to buy item');
+    }
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -49,4 +68,6 @@ module.exports = {
     deleteUser,
     login,
     logout,
+    createItem,
+    buyItem,
 };

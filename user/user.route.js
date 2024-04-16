@@ -21,4 +21,12 @@ router
     .route('/logout')
     .post(authenticate, userController.logout);
 
+router
+    .route('/createItem')
+    .get(authenticate, userController.createItem);
+
+router
+    .route('/buyItem')
+    .get(authenticate, userController.buyItem);
+
 module.exports = router;
