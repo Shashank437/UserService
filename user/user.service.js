@@ -24,7 +24,7 @@ const deleteUser = async (id) => {
 };
 
 const login = async (data) => {
-    const user = await User.findOne({ email: data.email });
+    const user = (await User.findOne({ email: data.email })).toObject();
     if (!user) {
         throw new Error('User not found');
     }
@@ -32,9 +32,14 @@ const login = async (data) => {
     if (!isMatch) {
         throw new Error('Invalid password');
     }
-    const token = jwt.sign({ id: user._id }, 'secret', { expiresIn: '1h' })
+    const token = jwt.sign({ id: user._id }, 'secret')
+    await User.findByIdAndUpdate(user._id, { token });
     return {user, token};
 };
+
+const logout = async (id) => {
+    return User.findByIdAndUpdate(id, { token: null });
+}
 
 module.exports = {
     createUser,
@@ -43,4 +48,5 @@ module.exports = {
     updateUser,
     deleteUser,
     login,
+    logout,
 };

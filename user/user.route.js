@@ -5,13 +5,13 @@ const authenticate = require('./authenticate.user.js');
 router
     .route('/')
     .post(userController.createUser)
-    .get(authenticate(), userController.getAllUsers);
+    .get(authenticate, userController.getAllUsers);
 
 router
     .route('/:id')
-    .get(authenticate(), userController.getOneUser)
-    .put(authenticate(), userController.updateUser)
-    .delete(authenticate(), userController.deleteUser);
+    .get(authenticate, userController.getOneUser)
+    .put(authenticate, userController.updateUser)
+    .delete(authenticate, userController.deleteUser);
 
 router
     .route('/login')
@@ -19,6 +19,6 @@ router
 
 router
     .route('/logout')
-    .post(authenticate(), userController.logout);
+    .post(authenticate, userController.logout);
 
 module.exports = router;

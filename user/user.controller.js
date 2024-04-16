@@ -54,6 +54,15 @@ const login = async (req, res) => {
     }
 };
 
+const logout = async (req, res) => {
+    try {
+        await userService.logout(req.body.id);
+        res.status(204).send();
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -61,4 +70,5 @@ module.exports = {
     updateUser,
     deleteUser,
     login,
+    logout,
 };
