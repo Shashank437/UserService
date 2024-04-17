@@ -1,6 +1,8 @@
-const router = require('express').Router();
+const express = require('express');
 const orderController = require('./order.controller.js');
 const authenticate = require('../user/authenticate.user.js');
+
+const router = express.Router();
 
 router
     .route('/')
@@ -9,4 +11,6 @@ router
 
 router
     .route('/:id')
-    .post(authenticate, orderController.cancelOrder)
+    .post(authenticate, orderController.cancelOrder);
+
+module.exports = router;

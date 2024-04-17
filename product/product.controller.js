@@ -1,8 +1,11 @@
+const User = require('../user/user.model.js');
 const productService = require('./product.service.js');
 
-const createItem = async (req, res) => {
+const createProduct = async (req, res) => {
     try {
-        if (req.user.role !== 'admin') {
+        const user  = await User.findById(req.userId);
+        console.log(user.role);
+        if (user.role !== 'admin') {
             throw new Error('Only admins can create items');
         }
         const item = await productService.createItem(req.body);
@@ -64,7 +67,7 @@ const rateProduct = async (req, res) => {
 }
 
 module.exports = {
-    createItem,
+    createProduct,
     getAllProducts,
     getOneProduct,
     updateProduct,

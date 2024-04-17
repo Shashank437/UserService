@@ -1,6 +1,8 @@
-const router = require('express').Router();
+const express = require('express');
 const productController = require('./product.controller.js');
 const authenticate = require('../user/authenticate.user.js');
+
+const router = express.Router();
 
 router
     .route('/')

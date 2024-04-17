@@ -2,7 +2,9 @@ const axios = require('axios');
 
 const createItem = async (data) => {
     try {
-        const response = await axios.post('https://localhost:3000/product', data);
+        console.log('data', data);
+        const response = await axios.post('http://localhost:3000/product', data);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         throw new Error('Failed to create item');
@@ -11,7 +13,7 @@ const createItem = async (data) => {
 
 const getAllProducts = async () => {
     try {
-        const response = await axios.get('https://localhost:3000/product');
+        const response = await axios.get('http://localhost:3000/product');
         return response.data;
     } catch (error) {
         throw new Error('Failed to get products');
@@ -20,7 +22,7 @@ const getAllProducts = async () => {
 
 const getOneProduct = async (id) => {
     try {
-        const response = await axios.get(`https://localhost:3000/product/${id}`);
+        const response = await axios.get(`http://localhost:3000/product/${id}`);
         return response.data;
     } catch (error) {
         throw new Error('Failed to get product');
@@ -29,7 +31,7 @@ const getOneProduct = async (id) => {
 
 const updateProduct = async (id, data) => {
     try {
-        const response = await axios.put(`https://localhost:3000/product/${id}`, data);
+        const response = await axios.put(`http://localhost:3000/product/${id}`, data);
         return response.data;
     } catch (error) {
         throw new Error('Failed to update product');
@@ -38,7 +40,7 @@ const updateProduct = async (id, data) => {
 
 const deleteProduct = async (id) => {
     try {
-        const response = await axios.delete(`https://localhost:3000/product/${id}`);
+        const response = await axios.delete(`http://localhost:3000/product/${id}`);
         return response.data;
     } catch (error) {
         throw new Error('Failed to delete product');
@@ -47,7 +49,7 @@ const deleteProduct = async (id) => {
 
 const rateProduct = async (id, data) => {
     try {
-        const response = await axios.post(`https://localhost:3000/product/rate/${id}`, data);
+        const response = await axios.post(`http://localhost:3000/product/rate/${id}`, data);
         return response.data;
     } catch (error) {
         throw new Error('Failed to rate product');
