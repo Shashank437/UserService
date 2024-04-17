@@ -63,28 +63,6 @@ const logout = async (req, res) => {
     }
 }
 
-const createItem = async (req, res) => {
-    try {
-        if (req.user.role !== 'admin') {
-            throw new Error('Only admins can create items');
-        }
-        const item = await userService.createItem(req.body);
-        res.status(201).json(item);
-    } catch (error) {
-        res.status(400).send(error.message);
-    }
-}
-
-const buyItem = async (req, res) => {
-    try {
-        const item = await userService.buyItem(req.body);
-        res.status(200).json(item);
-    } catch (error) {
-        res.status(400).send(error.message);
-    }
-
-}
-
 module.exports = {
     createUser,
     getAllUsers,
@@ -93,6 +71,4 @@ module.exports = {
     deleteUser,
     login,
     logout,
-    createItem,
-    buyItem,
 };
