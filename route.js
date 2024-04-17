@@ -1,6 +1,7 @@
 const express = require('express');
 const userRoute = require('./user/user.route.js');
 const productRoute = require('./product/product.route.js');
+const orderRoute = require('./order/order.route.js');
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const allRoutes = [
   {
     path: '/products',
     route: productRoute,
+  },
+  {
+    path: '/orders',
+    route: orderRoute,
   }
 ];
 
