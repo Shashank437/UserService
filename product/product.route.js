@@ -1,22 +1,22 @@
 const express = require('express');
 const productController = require('./product.controller.js');
-const authenticate = require('../user/authenticate.user.js');
+const { authenticateUser, authenticateAdmin } = require('../user/authenticate.user.js');
 
 const router = express.Router();
 
 router
     .route('/')
-    .post(authenticate, productController.createProduct)
-    .get(authenticate, productController.getAllProducts);
+    .post(authenticateAdmin, productController.createProduct)
+    .get(authenticateUser, productController.getAllProducts);
 
 router
     .route('/:id')
-    .get(authenticate, productController.getOneProduct)
-    .put(authenticate, productController.updateProduct)
-    .delete(authenticate, productController.deleteProduct);
+    .get(authenticateUser, productController.getOneProduct)
+    .put(authenticateAdmin, productController.updateProduct)
+    .delete(authenticateAdmin, productController.deleteProduct);
 
 router
     .route('/rate/:id')
-    .post(authenticate, productController.rateProduct);
+    .post(authenticateUser, productController.rateProduct);
 
 module.exports = router;

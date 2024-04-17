@@ -1,8 +1,9 @@
 const axios = require('axios');
+require('dotenv').config(); 
 
 const createOrder = async (data) => {
     try {
-        const response = await axios.post('https://localhost:4002/order', data);
+        const response = await axios.post(process.env.ORDER_URL, data);
         return response.data;
     } catch (error) {
         throw new Error('Failed to create order');
@@ -11,7 +12,7 @@ const createOrder = async (data) => {
 
 const getAllOrders = async () => {
     try {
-        const response = await axios.get('https://localhost:4002/order');
+        const response = await axios.get(`${process.env.ORDER_URL}/order`);
         return response.data;
     } catch (error) {
         throw new Error('Failed to get orders');
@@ -20,7 +21,7 @@ const getAllOrders = async () => {
 
 const cancelOrder = async (id) => {
     try {
-        const response = await axios.delete(`https://localhost:4002/order/${id}`);
+        const response = await axios.delete(`${process.env.ORDER_URL}/order/${id}`);
         return response.data;
     } catch (error) {
         throw new Error('Failed to cancel order');

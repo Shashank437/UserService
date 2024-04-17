@@ -8,7 +8,7 @@ const createProduct = async (req, res) => {
         if (user.role !== 'admin') {
             throw new Error('Only admins can create items');
         }
-        const item = await productService.createItem(req.body);
+        const item = await productService.createItem({ ...req.body, createdBy: req.userId });
         res.status(201).json(item);
     } catch (error) {
         res.status(400).send(error.message);

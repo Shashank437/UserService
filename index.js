@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const port = 4001;
+const port = 4002;
 const routes = require('./route.js');
 
 app.use(express.json());

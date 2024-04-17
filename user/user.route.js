@@ -1,17 +1,17 @@
 const router = require('express').Router();
 const userController = require('./user.controller.js');
-const authenticate = require('./authenticate.user.js');
+const { authenticateUser, authenticateAdmin} = require('./authenticate.user.js');
 
 router
     .route('/')
-    .post(userController.createUser)
-    .get(authenticate, userController.getAllUsers);
+    .post(userController.registerUser)
+    .get(authenticateAdmin, userController.getAllUsers);
 
 router
     .route('/:id')
-    .get(authenticate, userController.getOneUser)
-    .put(authenticate, userController.updateUser)
-    .delete(authenticate, userController.deleteUser);
+    .get(authenticateUser, userController.getOneUser)
+    .put(authenticateUser, userController.updateUser)
+    .delete(authenticateAdmin, userController.deleteUser);
 
 router
     .route('/login')
@@ -19,6 +19,6 @@ router
 
 router
     .route('/logout')
-    .post(authenticate, userController.logout);
+    .post(authenticateUser, userController.logout);
 
 module.exports = router;
