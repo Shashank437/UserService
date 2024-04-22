@@ -3,7 +3,10 @@ require('dotenv').config();
 
 const createOrder = async (data) => {
     try {
-        const response = await axios.post(process.env.ORDER_URL, data);
+        console.log('data', data);
+        console.log('process.env.ORDER_URL', `${process.env.ORDER_URL}/order`);
+        const response = await axios.post(`${process.env.ORDER_URL}/order`, data);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         throw new Error('Failed to create order');

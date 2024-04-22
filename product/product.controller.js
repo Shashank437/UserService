@@ -5,7 +5,7 @@ const createProduct = async (req, res) => {
     try {
         const user  = await User.findById(req.userId);
         console.log(user.role);
-        if (user.role !== 'admin') {
+        if (user.role !== 'Admin') {
             throw new Error('Only admins can create items');
         }
         const item = await productService.createItem({ ...req.body, createdBy: req.userId });
@@ -35,7 +35,7 @@ const getOneProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     try {
-        if (req.user.role !== 'admin') {
+        if (req.user.role !== 'Admin') {
             throw new Error('Only admins can update items');
         }
         const product = await productService.updateProduct(req.params.id, req.body);
@@ -47,7 +47,7 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
     try {
-        if (req.user.role !== 'admin') {
+        if (req.user.role !== 'Admin') {
             throw new Error('Only admins can delete items');
         }
         await productService.deleteProduct(req.params.id);
